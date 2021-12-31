@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SelfNotes</string>
+    <string name="button">Button</string>
+    <string name="sign_in_now">Sign In Now</string>
+    <string name="done">Done!</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="name">Name</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="msg_subscribed">Subscribed!</string>
+    <string name="msg_subscribe_failed">Subscription Failed!</string>
+    <string name="channel_name">PushNotifications</string>
+    <string name="channel_description">Notifications recieved from server.</string>
+    <string name="add_a_new_alarm">Add a new Alarm</string>
+    <string name="enter_a_title_for_alarm">Enter a Title for Alarm</string>
+    <string name="enter_the_time_for_the_alarm">Enter the time for the Alarm</string>
+    <string name="set_time">Set Time</string>
+    <string name="time_for_alarm">Time For Alarm</string>
+    <string name="date_for_alarm">Date For Alarm</string>
+    <string name="set_date">Set Date</string>
+    <string name="enter_a_description_for_the_alarm">Enter a description for the alarm.</string>
+    <string name="midnight">00:00</string>
+    <string name="meet_selfnotes">Meet SelfNotes!</string>
+    <string name="description_self_notes">SelfNotes is a smart and accurate routine and alarm manager that let you do the important things at the right time along with reducing your device usage time by sending alarms as notifications.</string>
+    <string name="add_a_new_alarm_now">Add a new alarm now!</string>
+    <string name="loading">Loading...</string>
+</resources>
