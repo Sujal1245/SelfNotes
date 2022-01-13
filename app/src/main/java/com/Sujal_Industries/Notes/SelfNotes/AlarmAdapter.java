@@ -1,5 +1,7 @@
 package com.Sujal_Industries.Notes.SelfNotes;
 
+import static android.content.Context.ALARM_SERVICE;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,21 +9,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Calendar;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static android.content.Context.ALARM_SERVICE;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder> {
 
@@ -64,7 +62,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder
             notifyItemChanged(position);
         });
 
-        setAnimation(holder.itemView, position);
     }
 
     @Override
@@ -136,15 +133,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder
             alarm.save();
         });
         snackbar.show();
-    }
-
-    private void setAnimation(View viewToAnimate, int position) {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
-        }
     }
 
     @Override

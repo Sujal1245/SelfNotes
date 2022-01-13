@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +68,7 @@ public class App extends AppCompatActivity {
 
         alarmList.addAll(alarms);
         alarmAdapter.notifyDataSetChanged();
+        animateRecyclerView();
 
         manageLayout(alarmList.size() == 0);
 
@@ -75,21 +77,18 @@ public class App extends AppCompatActivity {
             startActivity(intent);
         });
 
-        changeUI.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                boolean isNight = sharedPreferences.getBoolean("isNight", false);
-                if (isNight) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor.putBoolean("isNight", false);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putBoolean("isNight", true);
-                }
-                editor.apply();
+        changeUI.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences1 = getSharedPreferences(spFileKey, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            boolean isNight1 = sharedPreferences1.getBoolean("isNight", false);
+            if (isNight1) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                editor.putBoolean("isNight", false);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                editor.putBoolean("isNight", true);
             }
+            editor.apply();
         });
     }
 
@@ -104,6 +103,7 @@ public class App extends AppCompatActivity {
         alarmList.addAll(alarms);
 
         alarmAdapter.notifyDataSetChanged();
+        animateRecyclerView();
 
         manageLayout(alarmList.size() == 0);
     }
@@ -117,5 +117,27 @@ public class App extends AppCompatActivity {
             alt_layout.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void animateRecyclerView() {
+        recyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+
+                    @Override
+                    public boolean onPreDraw() {
+                        recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                        for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                            View v = recyclerView.getChildAt(i);
+                            v.setAlpha(0.0f);
+                            v.animate().alpha(1.0f)
+                                    .setDuration(600)
+                                    .setStartDelay(i * 100)
+                                    .start();
+                        }
+
+                        return true;
+                    }
+                });
     }
 }

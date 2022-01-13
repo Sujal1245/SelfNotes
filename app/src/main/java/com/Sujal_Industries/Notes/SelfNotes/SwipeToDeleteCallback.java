@@ -1,6 +1,5 @@
 package com.Sujal_Industries.Notes.SelfNotes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -29,8 +28,8 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         mAdapter = adapter;
         icon = ContextCompat.getDrawable(context,
-                android.R.drawable.ic_menu_delete);
-        background = new ColorDrawable(Color.RED);
+                R.drawable.ic_baseline_delete_24);
+        background = new ColorDrawable(Color.TRANSPARENT);
         this.context=context;
         this.activity=activity;
     }

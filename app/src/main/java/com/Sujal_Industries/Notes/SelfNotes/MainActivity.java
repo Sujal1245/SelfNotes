@@ -5,10 +5,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SplashScreen.installSplashScreen(this);
         doInitialSetup();
     }
 
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                             editor.apply();
                             Log.d(TAG, msg);
-                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         });
             }
             Intent intent = new Intent(getApplicationContext(), App.class);
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     editor.apply();
                                     Log.d(TAG, msg);
-                                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                                 });
                     }
                     // Accessing Cloud FireStore...
@@ -125,13 +124,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), App.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Sign in failed. If response is null the user canceled the
                     // sign-in flow using the back button. Otherwise check
                     // response.getError().getErrorCode() and handle the error.
                     // ...
-                    Toast.makeText(getApplicationContext(), "Failure!", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Failure!");
                 }
             }
 

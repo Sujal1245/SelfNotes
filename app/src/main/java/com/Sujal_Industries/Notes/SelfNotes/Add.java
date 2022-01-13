@@ -12,8 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textview.MaterialTextView;
+import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,15 +28,15 @@ import java.util.List;
 
 public class Add extends AppCompatActivity {
 
-    EditText uTitle, uDescription;
-    TextView uTime;
-    Button setTime, done;
-    LinearLayout linearLayout;
-    AlarmManager alarmManager;
-    PendingIntent alarmIntent;
-    int hour, minute;
-    int kHour, kMinutes;
-    boolean timeSelected = false;
+    private EditText uTitle, uDescription;
+    private MaterialTextView uTime;
+    private MaterialButton setTime, done;
+    private LinearLayoutCompat linearLayout;
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
+    private int hour, minute;
+    private int kHour, kMinutes;
+    private boolean timeSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,40 +122,44 @@ public class Add extends AppCompatActivity {
         final Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
+        MaterialTimePicker mtp = new MaterialTimePicker.Builder().setTitleText("Select Time").setHour(hour).setMinute(minute).build();
+        mtp.show(getSupportFragmentManager(), "Alarm");
+        mtp.addOnPositiveButtonClickListener(view -> {
+            timeSelected = true;
+            int hourOfDay = mtp.getHour();
+            int minutes = mtp.getMinute();
+            String hod, moh;
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                (view, hourOfDay, minutes) -> {
-                    timeSelected = true;
+            if (Integer.toString(hourOfDay).length() == 1) {
+                hod = ("0" + hourOfDay);
+            } else {
+                hod = Integer.toString(hourOfDay);
+            }
+            System.out.println(hod);
 
-                    String hod, moh;
+            if (Integer.toString(minutes).length() == 1) {
+                moh = ("0" + minutes);
+            } else {
+                moh = Integer.toString(minutes);
+            }
 
-                    if (Integer.toString(hourOfDay).length() == 1) {
-                        hod = ("0" + hourOfDay);
-                    } else {
-                        hod = Integer.toString(hourOfDay);
-                    }
+            String t;
+            if (hourOfDay == 0 && minutes == 0) {
+                t = hod + ":" + moh + " Midnight";
+            } else if (hourOfDay == 12 && minutes == 0) {
+                t = hod + ":" + moh + " Noon";
+            } else if (hourOfDay < 12) {
+                t = hod + ":" + moh + " AM";
+            } else if ((hourOfDay - 12) >= 10) {
+                t = (hourOfDay - 12) + ":" + moh + " PM";
+            } else {
+                t = "0" + (hourOfDay - 12) + ":" + moh + " PM";
+            }
 
-                    if (Integer.toString(minutes).length() == 1) {
-                        moh = ("0" + minutes);
-                    } else {
-                        moh = Integer.toString(minutes);
-                    }
+            kHour = hourOfDay;
+            kMinutes = minutes;
+            uTime.setText(t);
 
-                    String t;
-                    if (hourOfDay == 0 && minutes == 0) {
-                        t = hod + ":" + moh + " Midnight";
-                    } else if (hourOfDay == 12 && minutes == 0) {
-                        t = hod + ":" + moh + " Noon";
-                    } else if (hourOfDay < 12) {
-                        t = hod + ":" + moh + " AM";
-                    } else {
-                        t = "0"+ (hourOfDay - 12) + ":" + moh + " PM";
-                    }
-
-                    kHour = hourOfDay;
-                    kMinutes = minutes;
-                    uTime.setText(t);
-                }, hour, minute, false);
-        timePickerDialog.show();
+        });
     }
 }
