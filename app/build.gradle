@@ -6,8 +6,8 @@ android {
         applicationId "com.Sujal_Industries.Notes.SelfNotes"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 11
-        versionName "1.4"
+        versionCode 13
+        versionName "1.4.2"
         // Enabling multidex support.
         multiDexEnabled true
     }

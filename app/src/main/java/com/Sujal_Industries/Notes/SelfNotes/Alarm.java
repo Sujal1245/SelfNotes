@@ -17,7 +17,7 @@ public class Alarm extends SugarRecord {
     public Alarm() {
     }
 
-    Alarm(String title, String description, String time, int hour, int minutes, int unino) {
+    public Alarm(String title, String description, String time, int hour, int minutes, int unino) {
         this.title = title;
         this.description = description;
         this.time = time;
@@ -26,7 +26,7 @@ public class Alarm extends SugarRecord {
         this.unino = unino;
     }
 
-    String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -34,7 +34,7 @@ public class Alarm extends SugarRecord {
         this.title = title;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -42,15 +42,15 @@ public class Alarm extends SugarRecord {
         this.description = description;
     }
 
-    boolean isExpanded() {
+    public boolean isExpanded() {
         return expanded;
     }
 
-    void setExpanded(boolean expanded) {
+    public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
 
-    int getHour() {
+    public int getHour() {
         return hour;
     }
 
@@ -58,7 +58,7 @@ public class Alarm extends SugarRecord {
         this.hour = hour;
     }
 
-    int getMinutes() {
+    public int getMinutes() {
         return minutes;
     }
 
@@ -66,7 +66,7 @@ public class Alarm extends SugarRecord {
         this.minutes = minutes;
     }
 
-    String getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -74,7 +74,7 @@ public class Alarm extends SugarRecord {
         this.time = time;
     }
 
-    int getUnino() {
+    public int getUnino() {
         return unino;
     }
 
