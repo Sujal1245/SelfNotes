@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
-    private AlarmAdapter mAdapter;
+    private final AlarmAdapter mAdapter;
 
-    private Drawable icon;
+    private final Drawable icon;
     private final ColorDrawable background;
 
-    private Context context;
-    private AppCompatActivity activity;
+    private final Context context;
+    private final AppCompatActivity activity;
 
 
     SwipeToDeleteCallback(AlarmAdapter adapter, Context context, AppCompatActivity activity) {
@@ -42,7 +42,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        int position = viewHolder.getAdapterPosition();
+        int position = viewHolder.getBindingAdapterPosition();
         mAdapter.deleteAlarm(context,activity,position);
     }
 

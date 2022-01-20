@@ -41,7 +41,7 @@ public class App extends AppCompatActivity {
         changeUI = findViewById(R.id.changeUI);
 
         alarmList = new ArrayList<>();
-        alarmAdapter = new AlarmAdapter(alarmList, App.this);
+        alarmAdapter = new AlarmAdapter(alarmList);
 
         SharedPreferences sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
         boolean isNight = sharedPreferences.getBoolean("isNight", false);
@@ -132,7 +132,7 @@ public class App extends AppCompatActivity {
                             v.setAlpha(0.0f);
                             v.animate().alpha(1.0f)
                                     .setDuration(600)
-                                    .setStartDelay(i * 100)
+                                    .setStartDelay(i * 100L)
                                     .start();
                         }
 

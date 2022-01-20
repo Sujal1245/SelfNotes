@@ -1,12 +1,15 @@
 package com.Sujal_Industries.Notes.SelfNotes;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class DummyAlarm {
-    private String title;
-    private String description;
-    private String time;
-    private int hour;
-    private int minutes;
-    private int unino;//Unique Number.
+    public String title;
+    public String description;
+    public String time;
+    public int hour;
+    public int minutes;
+    public int unino;//Unique Number.
 
     public DummyAlarm() {
     }

@@ -23,15 +23,11 @@ import java.util.List;
 
 public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder> {
 
-    private List<Alarm> alarmList;
-    // Allows to remember the last item shown on screen
-    private int lastPosition = -1;
-    private Context context;
+    private final List<Alarm> alarmList;
 
 
-    AlarmAdapter(List<Alarm> alarmList, Context context) {
+    AlarmAdapter(List<Alarm> alarmList) {
         this.alarmList = alarmList;
-        this.context = context;
     }
 
     @NonNull
