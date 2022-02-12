@@ -38,7 +38,8 @@ public class BootReceiver extends BroadcastReceiver {
                     //Setting data to intent...
                     i.putExtra("Title", title);
                     i.putExtra("Description", description);
-                    alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), uid, i, 0);
+                    int flag = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : 0;
+                    alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), uid, i, flag);
                     //Specifying Time...
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(System.currentTimeMillis());

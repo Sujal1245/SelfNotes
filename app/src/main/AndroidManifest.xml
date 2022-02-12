@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.Sujal_Industries.Notes.SelfNotes">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -12,8 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/android_alarmmanager"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        android:theme="@style/AppTheme">
 
         <receiver
             android:name=".AlarmReceiver"
@@ -78,7 +76,7 @@
             android:value="notes.db" />
         <meta-data
             android:name="VERSION"
-            android:value="2" />
+            android:value="3" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />

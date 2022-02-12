@@ -97,7 +97,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("Title", title);
         intent.putExtra("Description", description);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uid, intent, 0);
+        int flag = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : 0;
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, uid, intent, flag);
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
         }
@@ -115,7 +116,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.MyViewHolder
             Intent intent1 = new Intent(context, AlarmReceiver.class);
             intent1.putExtra("Title", title);
             intent1.putExtra("Description", description);
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, uid, intent1, 0);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, uid, intent1, flag);
             //Specifying Time...
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());

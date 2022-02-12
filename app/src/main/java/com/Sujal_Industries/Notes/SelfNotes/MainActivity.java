@@ -40,12 +40,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SplashScreen.installSplashScreen(this);
+        Log.e(TAG, "ENTER");
         doInitialSetup();
     }
 
     private void doInitialSetup() {
+        Log.e(TAG, "Starting initial setup...");
         sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             if (!sharedPreferences.getBoolean("FCM", false)) {
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     .build();
             signInLauncher.launch(signInIntent);
         });
+        Log.e(TAG, "Ending Initial Setup...");
     }
 
     @Override
@@ -87,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void onSignInResult(FirebaseAuthUIAuthenticationResult result)
-    {
-        sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
+    private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in

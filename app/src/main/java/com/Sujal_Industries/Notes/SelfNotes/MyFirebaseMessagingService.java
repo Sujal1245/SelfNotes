@@ -29,22 +29,26 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            createNotification(remoteMessage.getNotification().getBody());
+            String title = remoteMessage.getNotification().getTitle();
+            String body = remoteMessage.getNotification().getBody();
+            Log.d(TAG, "Message Notification Title: " + title);
+            Log.d(TAG, "Message Notification Body: " + body);
+            createNotification(title, body);
         }
     }
 
-    private void createNotification(String body)
-    {
+    private void createNotification(String title, String body) {
         createNotificationChannel();
 
         Intent intent = new Intent(this, App.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        int flag = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : 0;
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, flag);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.android_alarmmanager)
-                .setContentTitle("")
+                .setContentTitle(title)
                 .setContentText(body)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(body))

@@ -25,11 +25,9 @@ public class Add extends AppCompatActivity {
 
     private EditText uTitle, uDescription;
     private MaterialTextView uTime;
-    private MaterialButton setTime, done;
     private LinearLayoutCompat linearLayout;
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
-    private int hour, minute;
     private int kHour, kMinutes;
     private boolean timeSelected = false;
 
@@ -42,8 +40,8 @@ public class Add extends AppCompatActivity {
         uDescription = findViewById(R.id.uDescription);
         uTime = findViewById(R.id.uTime);
 
-        setTime = findViewById(R.id.setTime);
-        done = findViewById(R.id.button_done);
+        MaterialButton setTime = findViewById(R.id.setTime);
+        MaterialButton done = findViewById(R.id.button_done);
 
         linearLayout = findViewById(R.id.linear_layout_add);
 
@@ -82,7 +80,8 @@ public class Add extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
                             intent.putExtra("Title", title);
                             intent.putExtra("Description", description);
-                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmList.size() + 1, intent, 0);
+                            int flag = (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) ? PendingIntent.FLAG_IMMUTABLE : 0;
+                            alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), alarmList.size() + 1, intent, flag);
                             //Specifying Time...
                             Calendar calendar = Calendar.getInstance();
                             calendar.setTimeInMillis(System.currentTimeMillis());
@@ -114,9 +113,9 @@ public class Add extends AppCompatActivity {
     }
 
     private void showTimePicker() {
-        final Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
+        Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
         MaterialTimePicker mtp = new MaterialTimePicker.Builder().setTitleText("Select Time").setHour(hour).setMinute(minute).build();
         mtp.show(getSupportFragmentManager(), "Alarm");
         mtp.addOnPositiveButtonClickListener(view -> {

@@ -10,6 +10,7 @@ import androidx.multidex.MultiDex;
 
 public class MyApplication extends SugarApp {
     private static final String spFileKey = "SelfNotes.SECRET_FILE";
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -19,10 +20,9 @@ public class MyApplication extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
-        SharedPreferences sharedPreferences=getSharedPreferences(spFileKey,MODE_PRIVATE);
-        boolean isNight=sharedPreferences.getBoolean("isNight",false);
-        if(isNight)
-        {
+        SharedPreferences sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
+        boolean isNight = sharedPreferences.getBoolean("isNight", false);
+        if (isNight) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
     }

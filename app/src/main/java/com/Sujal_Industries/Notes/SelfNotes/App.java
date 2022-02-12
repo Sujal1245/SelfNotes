@@ -21,12 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends AppCompatActivity {
-    FloatingActionButton add;
-    FloatingActionButton changeUI;
-    RecyclerView recyclerView;
-    LinearLayout alt_layout;
-    AlarmAdapter alarmAdapter;
-    List<Alarm> alarmList;
+    private RecyclerView recyclerView;
+    private LinearLayout alt_layout;
+    private AlarmAdapter alarmAdapter;
+    private List<Alarm> alarmList;
+    private SharedPreferences sharedPreferences;
     private static final String spFileKey = "SelfNotes.SECRET_FILE";
 
     @SuppressLint("NotifyDataSetChanged")
@@ -37,13 +36,13 @@ public class App extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         alt_layout = findViewById(R.id.alt_linear);
-        add = findViewById(R.id.add);
-        changeUI = findViewById(R.id.changeUI);
+        FloatingActionButton add = findViewById(R.id.add);
+        FloatingActionButton changeUI = findViewById(R.id.changeUI);
 
         alarmList = new ArrayList<>();
         alarmAdapter = new AlarmAdapter(alarmList);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
         boolean isNight = sharedPreferences.getBoolean("isNight", false);
         if (isNight) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -78,9 +77,8 @@ public class App extends AppCompatActivity {
         });
 
         changeUI.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(spFileKey, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences1.edit();
-            boolean isNight1 = sharedPreferences1.getBoolean("isNight", false);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            boolean isNight1 = sharedPreferences.getBoolean("isNight", false);
             if (isNight1) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 editor.putBoolean("isNight", false);
