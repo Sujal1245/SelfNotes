@@ -40,12 +40,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SplashScreen.installSplashScreen(this);
-        Log.e(TAG, "ENTER");
         doInitialSetup();
     }
 
     private void doInitialSetup() {
-        Log.e(TAG, "Starting initial setup...");
         sharedPreferences = getSharedPreferences(spFileKey, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     .build();
             signInLauncher.launch(signInIntent);
         });
-        Log.e(TAG, "Ending Initial Setup...");
     }
 
     @Override
