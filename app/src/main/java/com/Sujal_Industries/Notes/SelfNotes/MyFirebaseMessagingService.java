@@ -31,8 +31,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-            Log.d(TAG, "Message Notification Title: " + title);
-            Log.d(TAG, "Message Notification Body: " + body);
+            Log.d(TAG, "Message notification.mp3 Title: " + title);
+            Log.d(TAG, "Message notification.mp3 Body: " + body);
             createNotification(title, body);
         }
     }

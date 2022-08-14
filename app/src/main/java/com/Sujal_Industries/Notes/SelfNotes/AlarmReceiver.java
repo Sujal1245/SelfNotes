@@ -21,6 +21,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.android_alarmmanager)
                 .setContentTitle(intent.getStringExtra("Title"))
                 .setContentText(intent.getStringExtra("Description"))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(intent.getStringExtra("Description")))
                 .setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(420, builder.build());

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.Sujal_Industries.Notes.SelfNotes"
         minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 18
-        versionName "1.4.7"
+        targetSdkVersion 33
+        versionCode 19
+        versionName "1.4.8"
         // Enabling multidex support.
         multiDexEnabled true
     }
@@ -22,21 +22,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    buildToolsVersion '32.1.0-rc1'
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.7'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
-    implementation 'com.google.android.material:material:1.6.0-alpha02'
-    implementation 'com.google.firebase:firebase-messaging:23.0.0'
-    implementation 'com.google.firebase:firebase-firestore:24.0.1'
+    implementation 'com.google.android.material:material:1.7.0-beta01'
+    implementation 'com.google.firebase:firebase-messaging:23.0.7'
+    implementation 'com.google.firebase:firebase-firestore:24.2.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.github.satyan:sugar:1.5'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
